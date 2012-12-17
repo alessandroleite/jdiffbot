@@ -1,0 +1,15 @@
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+#Maven target directory
+target
+
+#Eclipse files
+.classpath
+.project
+.settings/
+
