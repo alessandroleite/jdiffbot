@@ -1,4 +1,4 @@
-JDiffbot
+JDiffbot [![Build Status](https://secure.travis-ci.org/alessandroleite/jdiffbot.png)](http://travis-ci.org/alessandroleite/jdiffbot) 
 ===================
 >Current version: 1.0.0-SNAPSHOT
 
@@ -20,7 +20,7 @@ How use it ?
 		DiffbotAPI api = new DiffbotAPI("<your token>");
 		Article article = api.article()
                              .extractFrom(uri)
-                            .analyze();
+                             .analyze();
 				 
 	__Or with all options__:
 	
@@ -30,7 +30,9 @@ How use it ?
                              .withComments()
                              .asHtml()
                              .withSummary()
-                             .analyze();	                         
+                             .analyze();	  
+3. ##### Build
+		mvn package -Dtoken=<your token>                                                    
                        	 
 
 How contribute
