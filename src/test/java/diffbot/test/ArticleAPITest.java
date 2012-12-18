@@ -30,14 +30,13 @@ import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
 
-
 import diffboat.api.DiffbotAPI;
 import diffboat.model.Article;
 
 public class ArticleAPITest {
-	
+
 	private String token;
-	
+
 	@Before
 	public void setup() {
 		token = System.getProperty("token");
@@ -49,15 +48,17 @@ public class ArticleAPITest {
 	@Test
 	public void must_extract_article_text() throws IOException {
 		String uri = "http://www.bbc.co.uk/news/world-us-canada-20750666";
-		Article article = new DiffbotAPI(this.token)
-				.article()
-				.extractFrom(uri)
-				.withTags()
-				.withComments()
-				.withSummary()
-				.analyze();
-		
-		assertNotNull(article);
-		assertNotNull(article.getText());
+		if (!isNullOrEmpty(token)) {
+			Article article = new DiffbotAPI(this.token)
+					.article()
+					.extractFrom(uri)
+					.withTags()
+					.withComments()
+					.withSummary()
+					.analyze();
+			
+			assertNotNull(article);
+			assertNotNull(article.getText());
+		} 
 	}
 }
