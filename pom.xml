@@ -5,7 +5,7 @@
 	<groupId>cc.alessandro</groupId>
 	<artifactId>jdiffbot</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0.0-SNAPSHOST</version>
+	<version>1.0-SNAPSHOT</version>
 	<inceptionYear>2012</inceptionYear>
 
 	<description>
@@ -138,7 +138,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.9</version>
+			<version>4.10</version>
 			<scope>test</scope>
 		</dependency>
 
