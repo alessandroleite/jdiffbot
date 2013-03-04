@@ -1,6 +1,6 @@
 JDiffbot [![Build Status](https://secure.travis-ci.org/alessandroleite/jdiffbot.png)](http://travis-ci.org/alessandroleite/jdiffbot) 
 ===================
->Current version: 1.0.0-SNAPSHOT
+>Current version: 1.0
 
 What is it ?
 ------------
