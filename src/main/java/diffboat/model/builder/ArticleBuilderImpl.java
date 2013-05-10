@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012 Alessandro Ferreira Leite, http://www.alessandro.cc/
+ * Copyright (c) 2012 Contributors
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -19,69 +19,83 @@
  * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * Contributors:
+ *          Alessandro Ferreira Leite - the initial implementation.
  */
 package diffboat.model.builder;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import diffboat.api.ArticleBuilder;
-import diffboat.http.Request;
-import diffboat.http.Request.Type;
+import diffboat.http.ServiceInvoker;
 import diffboat.model.Article;
 
 public class ArticleBuilderImpl implements ArticleBuilder {
-	
+
+	/**
+	 * Default value for <code>null</code> parameter value.
+	 */
+	private static final String NULL_PARAM_VALUE = "";
+
+	/**
+	 * The article URI.
+	 */
 	private final String uri = "article";
-	private final String token;
-	private List<Type> parameters = new ArrayList<Request.Type>();
-	
+
+	/**
+	 * The {@link ServiceInvoker} instance of the invoke the article service.
+	 */
+	private final ServiceInvoker request;
+
 	public ArticleBuilderImpl(String token) {
-		this.token = token;
-		parameters.add(new Type("token", token));
+		request = new ServiceInvoker(token, uri);
 	}
 
 	@Override
 	public ArticleBuilder extractFrom(String url) {
-		parameters.add(new Type("url", url));
+		request.addParam("url", ServiceInvoker.encode(url));
 		return this;
 	}
 
 	@Override
 	public ArticleBuilder asHtml() {
-		parameters.add(new Type("html",""));
+		request.addParam("url", NULL_PARAM_VALUE);
 		return this;
 	}
 
 	@Override
 	public ArticleBuilder dontStripAds() {
-		parameters.add(new Type("dontStripAds", ""));
+		request.addParam("dontStripAds", NULL_PARAM_VALUE);
 		return this;
 	}
 
 	@Override
 	public ArticleBuilder withTags() {
-		parameters.add(new Type("tags", ""));
+		request.addParam("tags", NULL_PARAM_VALUE);
 		return this;
 	}
 
 	@Override
 	public ArticleBuilder withComments() {
-		parameters.add(new Type("comments", ""));
+		request.addParam("comments", NULL_PARAM_VALUE);
 		return this;
 	}
 
 	@Override
 	public ArticleBuilder withSummary() {
-		parameters.add(new Type("summary", ""));
+		request.addParam("summary", NULL_PARAM_VALUE);
+		return this;
+	}
+
+	@Override
+	public ArticleBuilder withTimeout(long timeout) {
+		request.addParam("timeout", String.valueOf(timeout));
 		return this;
 	}
 
 	@Override
 	public Article analyze() throws IOException {
-		Request request = new Request(this.token, this.uri);
-		request.addParams(this.parameters);
 		return request.execute(Article.class);
 	}
 }

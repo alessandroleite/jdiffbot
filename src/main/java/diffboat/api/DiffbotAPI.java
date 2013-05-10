@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012 Alessandro Ferreira Leite, http://www.alessandro.cc/
+ * Copyright (c) 2012 Contributors
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -19,24 +19,30 @@
  * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * Contributors:
+ *          Alessandro Ferreira Leite - the initial implementation.
  */
 package diffboat.api;
 
-import static com.google.common.base.Preconditions.*;
-import static com.google.common.base.Strings.*;
-
 import diffboat.model.builder.ArticleBuilderImpl;
 
-public class DiffbotAPI {
+public class DiffbotAPI 
+{
+	private final String token;
 
-	private String token;
-
-	public DiffbotAPI(String token) {
-		checkArgument(!isNullOrEmpty(token));
+	public DiffbotAPI(String token) 
+	{
 		this.token = token;
 	}
 
-	public ArticleBuilder article() {
+	public ArticleBuilder article() 
+	{
 		return new ArticleBuilderImpl(token);
+	}
+	
+	public static DiffbotAPI newInstance(String token)
+	{
+		return new DiffbotAPI(token);
 	}
 }

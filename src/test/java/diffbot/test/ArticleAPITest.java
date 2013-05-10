@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012 Alessandro Ferreira Leite, http://www.alessandro.cc/
+ * Copyright (c) 2012 Contributors
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the
@@ -19,11 +19,13 @@
  * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * Contributors:
+ *          Alessandro Ferreira Leite - the initial implementation.
  */
 package diffbot.test;
 
 import static junit.framework.Assert.*;
-import static com.google.common.base.Strings.*;
 
 import java.io.IOException;
 
@@ -40,16 +42,20 @@ public class ArticleAPITest {
 	@Before
 	public void setup() {
 		token = System.getProperty("token");
-		if (isNullOrEmpty(token)) {
+		
+		if (token == null || token.isEmpty()) 
+		{
 			token = System.getenv("token");
 		}
 	}
 
 	@Test
-	public void must_extract_article_text() throws IOException {
+	public void must_extract_article_text() throws IOException 
+	{
 		String uri = "http://www.bbc.co.uk/news/world-us-canada-20750666";
-		if (!isNullOrEmpty(token)) {
-			Article article = new DiffbotAPI(this.token)
+		if (token != null) 
+		{
+			Article article = DiffbotAPI.newInstance(this.token)
 					.article()
 					.extractFrom(uri)
 					.withTags()
@@ -59,6 +65,6 @@ public class ArticleAPITest {
 			
 			assertNotNull(article);
 			assertNotNull(article.getText());
-		} 
+		}
 	}
 }
