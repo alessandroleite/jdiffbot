@@ -1,19 +1,37 @@
 JDiffbot [![Build Status](https://secure.travis-ci.org/alessandroleite/jdiffbot.png)](http://travis-ci.org/alessandroleite/jdiffbot) 
 ===================
->Current version: 1.0
+> Stable version: 1.1.0
 
-What is it ?
+What is it?
 ------------
 
 A [Diffbot](http://www.diffbot.com/) client for Java.
 
 
-How use it ?
+How to use it?
 ------------
 
 1. ##### Maven Repository
 
-	See instructions in [Maven Repository](https://github.com/alessandroleite/maven-repository)
+Add the following repository
+
+    <repositories>
+      <repository>        
+        <url>https://github.com/alessandroleite/maven-repository/raw/master/releases</url>
+        <snapshots>
+          <enabled>false</enabled>
+        </snapshots>
+      </repository>
+    </repositories>
+
+Declare the dependency
+
+    <dependency>
+       <groupId>jdiffbot</groupId>
+       <artifactId>jdiffbot</artifactId>
+       <version>1.1.0</version>
+    </dependency>
+
 
 2. ##### Usage
 
@@ -35,7 +53,7 @@ How use it ?
 		mvn package -Dtoken=<your token>                                                    
                        	 
 
-How contribute
+How to contribute
 --------------
 
 ### Reporting a Bug / Requesting a Feature
@@ -44,7 +62,7 @@ To report an issue or request a new feature you just have to open an issue in th
 
 ### Contributing some code
 
-To contribute, follow this steps:
+To contribute, follow these steps:
 
  1. Fork this project
  2. Add the progress label to the issue you want to solve (add a comments to say that you work on it)
