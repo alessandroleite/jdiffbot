@@ -25,8 +25,6 @@
  */
 package diffboat.api;
 
-import java.util.Objects;
-
 import diffboat.model.builder.ArticleBuilderImpl;
 
 public final class DiffbotAPI
@@ -44,7 +42,7 @@ public final class DiffbotAPI
      */
     public DiffbotAPI(String token)
     {
-        this.token_ = Objects.requireNonNull(token);
+        this.token_ = token;
     }
 
     /**
