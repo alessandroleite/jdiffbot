@@ -1,11 +1,10 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>jdiffbot</groupId>
 	<artifactId>jdiffbot</artifactId>
 	<packaging>jar</packaging>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.1.0</version>
 	<inceptionYear>2012</inceptionYear>
 
 	<description>
@@ -64,7 +63,7 @@
 		<connection>scm:git:ssh://github.com/alessandroleite/jdiffbot.git</connection>
 		<developerConnection>scm:git:git@github.com:alessandroleite/jdiffbot.git</developerConnection>
 		<url>https://github.com/alessandroleite/jdiffbot</url>
-		<tag>HEAD</tag>
+		<tag>jdiffbot-1.1.0</tag>
 	</scm>
 
 	<repositories>
@@ -266,10 +265,10 @@
 								<![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 								<fileset-config file-format-version="1.2.0" simple-config="true" sync-formatter="true">
 								<local-check-config name="${project.groupId}-checkstyle" location="${checkstyle.file}" type="external" description="">
-								<additional-data name="protect-config-file" value="false"/>
+								<additional-data name="protect-config-file" value="false" />
 								</local-check-config>
 								<fileset name="all" enabled="true" check-config-name="${project.groupId}-checkstyle" local="true">
-								<file-match-pattern match-pattern="." include-pattern="true"/>
+								<file-match-pattern match-pattern="." include-pattern="true" />
 								</fileset>
 								</fileset-config>
 								]]>
