@@ -32,199 +32,236 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
-public class Article implements Serializable {
+public final class Article implements Serializable
+{
+    /**
+     * Serial code version <code>serialVersionUID</code> for serialization.
+     */
+    private static final long serialVersionUID = 7531133216091403402L;
 
-	/**
-	 * Serial code version <code>serialVersionUID</code>
-	 */
-	private static final long serialVersionUID = 7531133216091403402L;
+    /** Plain-text of the extracted article. */
+    private String text_;
 
-	/** Plain-text of the extracted article */
-	private String text;
+    /** Title of extracted article. */
+    private final String title_;
 
-	/** Title of extracted article */
-	private final String title;
+    /** Article date (if detected). */
+    private final String date_;
 
-	/** Article date (if detected) */
-	private final String date;
+    /** Article author (if detected). */
+    private final String author_;
 
-	/** Article author (if detected) */
-	private final String author;
+    /** Media items (images or videos), if detected and extracted. */
+    private final Medias media_;
 
-	/** Media items (images or videos), if detected and extracted */
-	private final Medias media;
+    /** The submitted URL. */
+    private final String url_;
 
-	/** Submitted URL */
-	private final String url;
+    /**
+     * Returned if the resolving URL is different from the submitted URL (e.g., link shortening services).
+     */
+    private final String resolvedUrl_;
 
-	/**
-	 * Returned if the resolving URL is different from the submitted URL (e.g.,
-	 * link shortening services)
-	 */
-	private final String resolvedUrl;
+    /** XPath expression identifying the node containing the article contents. */
+    private final String xpath_;
 
-	/** XPath expression identifying the node containing the article contents */
-	private final String xpath;
+    /** Page favicon. */
+    private final String icon_;
 
-	/** Page favicon */
-	private final String icon;
+    /**
+     * HTML of the extracted article (returned in place of text if the html parameter is used).
+     */
+    private String html_;
 
-	/**
-	 * HTML of the extracted article (returned in place of text if the html
-	 * parameter is used)
-	 */
-	private String html;
+    /** Array of tags (returned if tags parameter is used). */
+    private String[] tags_;
 
-	/** Array of tags (returned if tags parameter is used) */
-	private String[] tags;
+    /** Summary text (returned if summary parameter is used). */
+    private String summary_;
 
-	/** Summary text (returned if summary parameter is used) */
-	private String summary;
+    /**
+     * 
+     * @param title
+     *            The article's title.
+     * @param text
+     *            The article's text.
+     * @param date
+     *            The article's date.
+     * @param author
+     *            The article's author, if available.
+     * @param media
+     *            The article's medias.
+     * @param xpath
+     *            The article's xpath.
+     * @param icon
+     *            The article's icons.
+     * @param submittedURL
+     *            The article's URL.
+     * @param resolvedUrl
+     *            The resolved url.
+     */
+    public Article(String title, String text, String date, String author, Medias media, String xpath, String icon, String submittedURL,
+            String resolvedUrl)
+    {
 
-	public Article(String title, String text, String date, String author,
-			Medias media, String xpath, String icon, String submittedURL,
-			String resolvedUrl) {
+        this.title_ = title;
+        this.text_ = text;
+        this.date_ = date;
+        this.author_ = author;
+        this.media_ = media;
+        this.xpath_ = xpath;
+        this.icon_ = icon;
+        this.url_ = submittedURL;
+        this.resolvedUrl_ = resolvedUrl;
+    }
 
-		this.title = title;
-		this.text = text;
-		this.date = date;
-		this.author = author;
-		this.media = media;
-		this.xpath = xpath;
-		this.icon = icon;
-		this.url = submittedURL;
-		this.resolvedUrl = resolvedUrl;
-	}
-	
-	@Override
-	public boolean equals(Object obj) {
-		return EqualsBuilder.reflectionEquals(this, obj);
-	}
-	
-	@Override
-	public int hashCode() {
-		return HashCodeBuilder.reflectionHashCode(this);
-	}
-	
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this,
-				ToStringStyle.MULTI_LINE_STYLE);
-	}
+    @Override
+    public boolean equals(Object obj)
+    {
+        return EqualsBuilder.reflectionEquals(this, obj);
+    }
 
-	/**
-	 * @return the text
-	 */
-	public String getText() {
-		return text;
-	}
+    @Override
+    public int hashCode()
+    {
+        return HashCodeBuilder.reflectionHashCode(this);
+    }
 
-	/**
-	 * @param text
-	 *            the text to set
-	 */
-	public void setText(String text) {
-		this.text = text;
-	}
+    @Override
+    public String toString()
+    {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
 
-	/**
-	 * @return the title
-	 */
-	public String getTitle() {
-		return title;
-	}
+    /**
+     * @return the text
+     */
+    public String getText()
+    {
+        return text_;
+    }
 
-	/**
-	 * @return the date
-	 */
-	public String getDate() {
-		return date;
-	}
+    /**
+     * @param text
+     *            the text to set
+     */
+    public void setText(String text)
+    {
+        this.text_ = text;
+    }
 
-	/**
-	 * @return the author
-	 */
-	public String getAuthor() {
-		return author;
-	}
+    /**
+     * @return the title
+     */
+    public String getTitle()
+    {
+        return title_;
+    }
 
-	/**
-	 * @return the medias
-	 */
-	public Medias getMedia() {
-		return media;
-	}
+    /**
+     * @return the date
+     */
+    public String getDate()
+    {
+        return date_;
+    }
 
-	/**
-	 * @return the url
-	 */
-	public String getUrl() {
-		return url;
-	}
+    /**
+     * @return the author
+     */
+    public String getAuthor()
+    {
+        return author_;
+    }
 
-	/**
-	 * @return the resolvedUrl
-	 */
-	public String getResolvedUrl() {
-		return resolvedUrl;
-	}
+    /**
+     * @return the medias
+     */
+    public Medias getMedia()
+    {
+        return media_;
+    }
 
-	/**
-	 * @return the xpath
-	 */
-	public String getXpath() {
-		return xpath;
-	}
+    /**
+     * @return the url
+     */
+    public String getUrl()
+    {
+        return url_;
+    }
 
-	/**
-	 * @return the icon
-	 */
-	public String getIcon() {
-		return icon;
-	}
+    /**
+     * @return the resolvedUrl
+     */
+    public String getResolvedUrl()
+    {
+        return resolvedUrl_;
+    }
 
-	/**
-	 * @return the html
-	 */
-	public String getHtml() {
-		return html;
-	}
+    /**
+     * @return the xpath
+     */
+    public String getXpath()
+    {
+        return xpath_;
+    }
 
-	/**
-	 * @param html
-	 *            the html to set
-	 */
-	public void setHtml(String html) {
-		this.html = html;
-	}
+    /**
+     * @return the icon
+     */
+    public String getIcon()
+    {
+        return icon_;
+    }
 
-	/**
-	 * @return the tags
-	 */
-	public String[] getTags() {
-		return tags;
-	}
+    /**
+     * @return the html
+     */
+    public String getHtml()
+    {
+        return html_;
+    }
 
-	/**
-	 * @param tags
-	 *            the tags to set
-	 */
-	public void setTags(String[] tags) {
-		this.tags = tags;
-	}
+    /**
+     * @param html
+     *            the html to set
+     */
+    public void setHtml(String html)
+    {
+        this.html_ = html;
+    }
 
-	/**
-	 * @return the summary
-	 */
-	public String getSummary() {
-		return summary;
-	}
+    /**
+     * @return the tags
+     */
+    public String[] getTags()
+    {
+        return tags_;
+    }
 
-	/**
-	 * @param summary
-	 *            the summary to set
-	 */
-	public void setSummary(String summary) {
-		this.summary = summary;
-	}
+    /**
+     * @param tags
+     *            the tags to set
+     */
+    public void setTags(String[] tags)
+    {
+        this.tags_ = tags;
+    }
+
+    /**
+     * @return the summary
+     */
+    public String getSummary()
+    {
+        return summary_;
+    }
+
+    /**
+     * @param summary
+     *            the summary to set
+     */
+    public void setSummary(String summary)
+    {
+        this.summary_ = summary;
+    }
 }

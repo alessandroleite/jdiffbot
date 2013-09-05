@@ -27,17 +27,35 @@ package diffboat.type.json.util;
 
 import com.google.gson.JsonElement;
 
-public final class JsonUtil {
-	
-	private JsonUtil(){
-		throw new UnsupportedOperationException();
-	}
+public final class JsonUtil
+{
+    /**
+     * Private constructor to avoid instances of this class.
+     */
+    private JsonUtil()
+    {
+        throw new UnsupportedOperationException();
+    }
 
-	public static String asString(JsonElement jsonElement) {
-		return jsonElement != null ? jsonElement.getAsString() : null;
-	}
-	
-	public static boolean asBoolean(JsonElement jsonElement) {
-		return jsonElement == null ? false : jsonElement.getAsBoolean();
-	}
+    /**
+     * Returns a {@link String} value of a given {@link JsonElement}.
+     * 
+     * @param jsonElement The {@link JsonElement} to get its string value.
+     * @return a {@link String} value of the given {@link JsonElement}.
+     */
+    public static String asString(JsonElement jsonElement)
+    {
+        return jsonElement != null ? jsonElement.getAsString() : null;
+    }
+
+    /**
+     * Returns a {@link Boolean} value of a given {@link JsonElement}.
+     * 
+     * @param jsonElement The {@link JsonElement} to get its boolean value.
+     * @return a {@link Boolean} value of the given {@link JsonElement}.
+     */
+    public static boolean asBoolean(JsonElement jsonElement)
+    {
+        return jsonElement == null ? false : jsonElement.getAsBoolean();
+    }
 }

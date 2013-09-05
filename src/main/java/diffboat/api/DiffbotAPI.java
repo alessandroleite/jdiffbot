@@ -25,24 +25,47 @@
  */
 package diffboat.api;
 
+import java.util.Objects;
+
 import diffboat.model.builder.ArticleBuilderImpl;
 
-public class DiffbotAPI 
+public final class DiffbotAPI
 {
-	private final String token;
+    /**
+     * The user's token.
+     */
+    private final String token_;
 
-	public DiffbotAPI(String token) 
-	{
-		this.token = token;
-	}
+    /**
+     * Creates an instance of this class using the user's token.
+     * 
+     * @param token
+     *            The token to be used. Might not be <code>null</code>.
+     */
+    public DiffbotAPI(String token)
+    {
+        this.token_ = Objects.requireNonNull(token);
+    }
 
-	public ArticleBuilder article() 
-	{
-		return new ArticleBuilderImpl(token);
-	}
-	
-	public static DiffbotAPI newInstance(String token)
-	{
-		return new DiffbotAPI(token);
-	}
+    /**
+     * Returns an instance of the {@link ArticleBuilder} to invoke the article services.
+     * 
+     * @return An instance of the {@link ArticleBuilder} to invoke the article services.
+     */
+    public ArticleBuilder article()
+    {
+        return new ArticleBuilderImpl(token_);
+    }
+
+    /**
+     * Factory method to the {@link DiffbotAPI}.
+     * 
+     * @param token
+     *            The user token. Might not be <code>null</code> or empty.
+     * @return An instance of the {@link DiffbotAPI}.
+     */
+    public static DiffbotAPI newInstance(String token)
+    {
+        return new DiffbotAPI(token);
+    }
 }

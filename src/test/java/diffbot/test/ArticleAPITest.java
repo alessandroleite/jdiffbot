@@ -25,46 +25,57 @@
  */
 package diffbot.test;
 
-import static junit.framework.Assert.*;
 
 import java.io.IOException;
-
-import org.junit.Before;
-import org.junit.Test;
 
 import diffboat.api.DiffbotAPI;
 import diffboat.model.Article;
 
-public class ArticleAPITest {
+import org.junit.Before;
+import org.junit.Test;
 
-	private String token;
+import static junit.framework.Assert.assertNotNull;
 
-	@Before
-	public void setup() {
-		token = System.getProperty("token");
-		
-		if (token == null || token.isEmpty()) 
-		{
-			token = System.getenv("token");
-		}
-	}
+public class ArticleAPITest
+{
+    /**
+     * The user's token to be used during the tests.
+     */
+    private String token_;
 
-	@Test
-	public void must_extract_article_text() throws IOException 
-	{
-		String uri = "http://www.bbc.co.uk/news/world-us-canada-20750666";
-		if (token != null) 
-		{
-			Article article = DiffbotAPI.newInstance(this.token)
-					.article()
-					.extractFrom(uri)
-					.withTags()
-					.withComments()
-					.withSummary()
-					.analyze();
-			
-			assertNotNull(article);
-			assertNotNull(article.getText());
-		}
-	}
+    /**
+     * Configure the token to be used.
+     */
+    @Before
+    public void setUp()
+    {
+        token_ = System.getProperty("token");
+
+        if (token_ == null || token_.isEmpty())
+        {
+            token_ = System.getenv("token");
+        }
+    }
+
+    /**
+     * @throws IOException If an I/O error occurs.
+     */
+    @Test
+    public void must_extract_article_text() throws IOException
+    {
+        String uri = "http://www.bbc.co.uk/news/world-us-canada-20750666";
+        if (token_ != null)
+        {
+            Article article = DiffbotAPI.newInstance(this.token_)
+                    .article()
+                    .extractFrom(uri)
+                    .withTags()
+                    .withComments()
+                    .withSummary()
+                    .analyze();
+
+            assertNotNull(article);
+            assertNotNull(article.getText());
+        }
+    }
 }

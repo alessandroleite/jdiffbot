@@ -43,247 +43,278 @@ import java.util.Map;
 
 import diffboat.util.gson.GsonFactory;
 
-public final class ServiceInvoker 
+public final class ServiceInvoker
 {
-	/**
-	 * The Diffbot API URL.
-	 */
-	private static final String API_SERVER = "http://www.diffbot.com/api/";
+    /**
+     * The Diffbot API URL.
+     */
+    private static final String API_SERVER = "http://www.diffbot.com/api/";
 
-	/**
-	 * The default buffer size to use.
-	 */
-	private static final int DEFAULT_BUFFER_SIZE = 1024 * 4;
+    /**
+     * The default buffer size to use.
+     */
+    private static final int DEFAULT_BUFFER_SIZE = 1024 * 4;
 
-	/**
-	 * The parameters of the service.
-	 */
-	private final Map<String, HttpParam> parameters = new HashMap<String, ServiceInvoker.HttpParam>();
+    /**
+     * The parameters of the service.
+     */
+    private final Map<String, HttpParam> parameters_ = new HashMap<String, ServiceInvoker.HttpParam>();
 
-	/**
-	 * The URI of the service.
-	 */
-	private final String uri;
-	
-	/**
-	 * The token API. Might not be <code>null</code>.
-	 */
-	private final String token;
+    /**
+     * The URI of the service.
+     */
+    private final String uri_;
 
-	public ServiceInvoker(String token, String uri) 
-	{
-		this.uri = uri;
-		this.token = token;
-		this.addParam("token", token);
-	}
+    /**
+     * The token API. Might not be <code>null</code>.
+     */
+    private final String token_;
 
-	public HttpParam addParam(HttpParam param) 
-	{
-		return this.parameters.put(param.getName(), param);
-	}
+    public ServiceInvoker(String token, String uri)
+    {
+        this.uri_ = uri;
+        this.token_ = token;
+        this.addParam("token", token);
+    }
 
-	public HttpParam addParam(String name, String value) 
-	{
-		return this.addParam(new HttpParam(name, value));
-	}
+    public HttpParam addParam(HttpParam param)
+    {
+        return this.parameters_.put(param.getName(), param);
+    }
 
-	public void addParams(List<HttpParam> params) 
-	{
-		if (params != null) {
-			for (HttpParam param : params) {
-				this.addParam(param);
-			}
-		}
-	}
+    public HttpParam addParam(String name, String value)
+    {
+        return this.addParam(new HttpParam(name, value));
+    }
 
-	public HttpParam removeParam(String name) {
-		return this.parameters.remove(name);
-	}
+    public void addParams(List<HttpParam> params)
+    {
+        if (params != null)
+        {
+            for (HttpParam param : params)
+            {
+                this.addParam(param);
+            }
+        }
+    }
 
-	public HttpParam removeParam(HttpParam param) {
-		return this.removeParam(param.getName());
-	}
+    public HttpParam removeParam(String name)
+    {
+        return this.parameters_.remove(name);
+    }
 
-	public HttpParam getParameter(String name) {
-		return this.parameters.get(name);
-	}
+    public HttpParam removeParam(HttpParam param)
+    {
+        return this.removeParam(param.getName());
+    }
 
-	public Collection<HttpParam> getParameters() {
-		return Collections.unmodifiableCollection(this.parameters.values());
-	}
+    public HttpParam getParameter(String name)
+    {
+        return this.parameters_.get(name);
+    }
 
-	public String getUri() {
-		return uri;
-	}
+    public Collection<HttpParam> getParameters()
+    {
+        return Collections.unmodifiableCollection(this.parameters_.values());
+    }
 
-	public String getToken() {
-		return this.token;
-	}
+    public String getUri()
+    {
+        return uri_;
+    }
 
-	public final static class HttpParam implements Serializable {
-		/**
-		 * Serial code version <code>serialVersionUID</code> for serialization.
-		 */
-		private static final long serialVersionUID = -1877460679133634095L;
+    public String getToken()
+    {
+        return this.token_;
+    }
 
-		/**
-		 * The param's name. Might not be <code>null</code>.
-		 */
-		private final String name;
+    public final static class HttpParam implements Serializable
+    {
+        /**
+         * Serial code version <code>serialVersionUID</code> for serialization.
+         */
+        private static final long serialVersionUID = -1877460679133634095L;
 
-		/**
-		 * The param's value.
-		 */
-		private final String value;
+        /**
+         * The param's name. Might not be <code>null</code>.
+         */
+        private final String name_;
 
-		public HttpParam(String name, String value) {
-			
-			if (name == null || name.trim().isEmpty()) 
-			{
-				throw new IllegalArgumentException("The param name is null or empty!");
-			}
-			
-			this.name = name;
-			this.value = value;
-		}
+        /**
+         * The param's value.
+         */
+        private final String value_;
 
-		public HttpParam(String name) {
-			this(name, "");
-		}
+        public HttpParam(String name, String value)
+        {
 
-		/**
-		 * @return the name
-		 */
-		public String getName() {
-			return name;
-		}
+            if (name == null || name.trim().isEmpty())
+            {
+                throw new IllegalArgumentException("The param name is null or empty!");
+            }
 
-		/**
-		 * @return the value
-		 */
-		public String getValue() {
-			return value;
-		}
+            this.name_ = name;
+            this.value_ = value;
+        }
 
-		@Override
-		public boolean equals(Object obj) {
-			if (obj == this) {
-				return true;
-			}
+        public HttpParam(String name)
+        {
+            this(name, "");
+        }
 
-			if (!(obj instanceof HttpParam)) {
-				return false;
-			}
+        /**
+         * @return the name
+         */
+        public String getName()
+        {
+            return name_;
+        }
 
-			return this.name.equalsIgnoreCase(((HttpParam) obj).name);
-		}
+        /**
+         * @return the value
+         */
+        public String getValue()
+        {
+            return value_;
+        }
 
-		@Override
-		public int hashCode() {
-			return this.getName().hashCode() * 17;
-		};
+        @Override
+        public boolean equals(Object obj)
+        {
+            if (obj == this)
+            {
+                return true;
+            }
 
-		@Override
-		public String toString() {
-			return String.format("Name: %s, value: %s", this.getName(),
-					this.getValue());
-		}
-	}
+            if (!(obj instanceof HttpParam))
+            {
+                return false;
+            }
 
-	/**
-	 * Returns the URL of the service with the HTTP parameters defined to the service. 
-	 * 
-	 * @return The URL of the service with the HTTP parameters defined to the service.
-	 */
-	private String buildURL() 
-	{
-		StringBuilder url = new StringBuilder();
+            return this.name_.equalsIgnoreCase(((HttpParam) obj).name_);
+        }
 
-		for (HttpParam param : this.getParameters()) 
-		{
-			url.append("&").append(param.getName());
-			
-			if (param.getValue() != null && !param.getValue().isEmpty())
-			{
-				url.append("=").append(param.getValue());
-			}
-		}
-			return String.format("%s%s?%s",API_SERVER, this.getUri(), url.toString());
-	}
+        @Override
+        public int hashCode()
+        {
+            return this.getName().hashCode() * 17;
+        };
 
-	/**
+        @Override
+        public String toString()
+        {
+            return String.format("Name: %s, value: %s", this.getName(), this.getValue());
+        }
+    }
+
+    /**
+     * Returns the URL of the service with the HTTP parameters defined to the service.
+     * 
+     * @return The URL of the service with the HTTP parameters defined to the service.
+     */
+    private String buildURL()
+    {
+        StringBuilder url = new StringBuilder();
+
+        for (HttpParam param : this.getParameters())
+        {
+            url.append("&").append(param.getName());
+
+            if (param.getValue() != null && !param.getValue().isEmpty())
+            {
+                url.append("=").append(param.getValue());
+            }
+        }
+        return String.format("%s%s?%s", API_SERVER, this.getUri(), url.toString());
+    }
+
+    /**
      * Copy bytes from a {@link Reader} to an {@link Writer}
      * <p>
-     * This method buffers the input internally, so there is no need to use a
-     * <code>BufferedInputStream</code>.
+     * This method buffers the input internally, so there is no need to use a <code>BufferedInputStream</code>.
      * 
-     * @param input  the {@link Reader} to read from
-     * @param output  the {@link Writer} output to write to
+     * @param input
+     *            the {@link Reader} to read from
+     * @param output
+     *            the {@link Writer} output to write to
      * @return the number of bytes copied
-     * @throws NullPointerException if the input or output is null
-     * @throws IOException if an I/O error occurs
+     * @throws NullPointerException
+     *             if the input or output is null
+     * @throws IOException
+     *             if an I/O error occurs
      */
-	protected long copy(Reader input, Writer output) throws IOException 
-	{
-		char[] buffer = new char[DEFAULT_BUFFER_SIZE];
-		long count = 0;
-		int n;
+    protected long copy(Reader input, Writer output) throws IOException
+    {
+        char[] buffer = new char[DEFAULT_BUFFER_SIZE];
+        long count = 0;
+        int n;
 
-		while ((n = input.read(buffer)) != -1) {
-			output.write(buffer, 0, n);
-			count += n;
-		}
+        while ((n = input.read(buffer)) != -1)
+        {
+            output.write(buffer, 0, n);
+            count += n;
+        }
 
-		return count;
-	}
+        return count;
+    }
 
-	 /**
-     * Get the contents of an <code>InputStream</code> as a String
-     * using the default character encoding of the platform.
+    /**
+     * Get the contents of an <code>InputStream</code> as a String using the default character encoding of the platform.
      * 
-     * @param input  the <code>InputStream</code> to read from
+     * @param input
+     *            the <code>InputStream</code> to read from
      * @return the requested String
-     * @throws NullPointerException if the input is null
-     * @throws IOException if an I/O error occurs
+     * @throws NullPointerException
+     *             if the input is null
+     * @throws IOException
+     *             if an I/O error occurs
      */
-	protected String asString(InputStream input) throws IOException 
-	{
-		StringWriter sw = new StringWriter();
-		copy(new InputStreamReader(input), sw);
-		return sw.toString();
-	}
+    protected String asString(InputStream input) throws IOException
+    {
+        StringWriter sw = new StringWriter();
+        copy(new InputStreamReader(input), sw);
+        return sw.toString();
+    }
 
-	public Response execute() throws IOException 
-	{
-		StringBuilder output = new StringBuilder();
+    public Response execute() throws IOException
+    {
+        StringBuilder output = new StringBuilder();
 
-		Response response = this.execute(Response.class, output);
-		response.setJson(output.toString());
+        Response response = this.execute(Response.class, output);
+        response.setJson(output.toString());
 
-		return response;
-	}
+        return response;
+    }
 
-	public <T> T execute(Class<T> jsonType) throws IOException 
-	{
-		return this.execute(jsonType, new StringBuilder());
-	}
+    public <T> T execute(Class<T> jsonType) throws IOException
+    {
+        return this.execute(jsonType, new StringBuilder());
+    }
 
-	protected <T> T execute(Class<T> jsonType, StringBuilder buffer) throws IOException 
-	{
-		URL url = new URL(buildURL());
-		buffer.append(asString(url.openStream()));
-		return GsonFactory.parser(buffer.toString(), jsonType);
-	}
-	
-	
-	public static String encode(String urlToEncode) 
-	{
-        try 
+    protected <T> T execute(Class<T> jsonType, StringBuilder buffer) throws IOException
+    {
+        URL url = new URL(buildURL());
+        buffer.append(asString(url.openStream()));
+        return GsonFactory.parser(buffer.toString(), jsonType);
+    }
+
+    /**
+     * Encode a given {@link String} using the UTF-8 encoding.
+     * 
+     * @param value
+     *            URL to be translated.
+     * @return The translated {@link String}.
+     * @throws RuntimeException If the JVM does not support the UTF-8 encoding.
+     */
+    public static String encode(String value)
+    {
+        try
         {
-            return URLEncoder.encode(urlToEncode, "UTF8");
-        } catch (UnsupportedEncodingException exception) 
+            return URLEncoder.encode(value, "UTF8");
+        }
+        catch (UnsupportedEncodingException exception)
         {
-        	throw new RuntimeException("The JVM does not support UTF-8 encoding!", exception);
+            throw new RuntimeException("The JVM does not support UTF-8 encoding!", exception);
         }
     }
 }

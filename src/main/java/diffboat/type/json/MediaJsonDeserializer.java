@@ -25,8 +25,6 @@
  */
 package diffboat.type.json;
 
-import static diffboat.type.json.util.JsonUtil.asBoolean;
-
 import java.lang.reflect.Type;
 
 import com.google.gson.JsonDeserializationContext;
@@ -37,15 +35,16 @@ import com.google.gson.JsonParseException;
 
 import diffboat.model.Media;
 
-public class MediaJsonDeserializer implements JsonDeserializer<Media>{
+import static diffboat.type.json.util.JsonUtil.asBoolean;
 
-	@Override
-	public Media deserialize(JsonElement json, Type typeOfT,
-			JsonDeserializationContext context) throws JsonParseException {
-		JsonObject jsonObject = (JsonObject) json;
-		return new Media(jsonObject.get("link").getAsString(), jsonObject.get("type").getAsString(), 
-				asBoolean(jsonObject.get("primary")));
-	}
+public class MediaJsonDeserializer implements JsonDeserializer<Media>
+{
 
-	
+    @Override
+    public Media deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException
+    {
+        JsonObject jsonObject = (JsonObject) json;
+        return new Media(jsonObject.get("link").getAsString(), jsonObject.get("type").getAsString(), asBoolean(jsonObject.get("primary")));
+    }
+
 }

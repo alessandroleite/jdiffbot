@@ -27,52 +27,77 @@ package diffboat.http;
 
 import java.io.Serializable;
 
-public final class Response implements Serializable{
-	
-	/**
-	 * Serial code version <code>serialVersionUID</code> 
-	 */
-	private static final long serialVersionUID = 1293612143192917226L;
-	
-	private String code;
-	private String state;
-	private String json;
-	
-	/**
-	 * @return the code
-	 */
-	public String getCode() {
-		return code;
-	}
-	/**
-	 * @param code the code to set
-	 */
-	public void setCode(String code) {
-		this.code = code;
-	}
-	/**
-	 * @return the state
-	 */
-	public String getState() {
-		return state;
-	}
-	/**
-	 * @param state the state to set
-	 */
-	public void setState(String state) {
-		this.state = state;
-	}
-	
-	/**
-	 * @return the json
-	 */
-	public String getJson() {
-		return json;
-	}
-	/**
-	 * @param json the json to set
-	 */
-	public void setJson(String json) {
-		this.json = json;
-	}
+public final class Response implements Serializable
+{
+
+    /**
+     * Serial code version <code>serialVersionUID</code> for serialization.
+     */
+    private static final long serialVersionUID = 1293612143192917226L;
+
+    /**
+     * The response code.
+     */
+    private String code_;
+    
+    /**
+     * The response state. 
+     */
+    private String state_;
+    
+    /**
+     * The response content in JSON format. 
+     */
+    private String json_;
+
+    /**
+     * @return the code
+     */
+    public String getCode()
+    {
+        return code_;
+    }
+
+    /**
+     * @param code
+     *            the code to set
+     */
+    public void setCode(String code)
+    {
+        this.code_ = code;
+    }
+
+    /**
+     * @return the state
+     */
+    public String getState()
+    {
+        return state_;
+    }
+
+    /**
+     * @param state
+     *            the state to set
+     */
+    public void setState(String state)
+    {
+        this.state_ = state;
+    }
+
+    /**
+     * @return the json
+     */
+    public String getJson()
+    {
+        return json_;
+    }
+
+    /**
+     * @param json
+     *            the json to set
+     */
+    public void setJson(String json)
+    {
+        this.json_ = json;
+    }
 }

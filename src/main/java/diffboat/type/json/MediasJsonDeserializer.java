@@ -36,19 +36,21 @@ import com.google.gson.JsonParseException;
 import diffboat.model.Media;
 import diffboat.model.Medias;
 
-public class MediasJsonDeserializer implements JsonDeserializer<Medias>{
+public class MediasJsonDeserializer implements JsonDeserializer<Medias>
+{
 
-	@Override
-	public Medias deserialize(JsonElement json, Type typeOfT,
-			JsonDeserializationContext context) throws JsonParseException {
-		
-		Medias medias = new Medias();
-		
-		if (json instanceof JsonArray){
-			for (JsonElement element : (JsonArray) json) {
-				medias.add((Media) context.deserialize(element, Media.class));
-			}
-		}
-		return medias;
-	}
+    @Override
+    public Medias deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException
+    {
+        Medias medias = new Medias();
+
+        if (json instanceof JsonArray)
+        {
+            for (JsonElement element : (JsonArray) json)
+            {
+                medias.add((Media) context.deserialize(element, Media.class));
+            }
+        }
+        return medias;
+    }
 }

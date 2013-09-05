@@ -12,6 +12,17 @@
 		JDiffbot is a client API for http://www.diffbot.com/ services. This project designed by current api docs: http://www.diffbot.com/our-apis/ 
     </description>
 
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<deploy-repo.url>file:///${env.DEFAULT_MAVEN_REPO_URL}</deploy-repo.url>
+		<source.version>1.6</source.version>
+		<gson.version>1.7.1</gson.version>
+		<commons-lang.version>2.6</commons-lang.version>
+		<checkstyle.file>${project.basedir}/checkstyle.xml</checkstyle.file>
+		<license-header-file>${project.basedir}/LICENSE.HEADER</license-header-file>
+	</properties>
+
 	<licenses>
 		<license>
 			<name>MIT</name>
@@ -55,15 +66,6 @@
 		<url>https://github.com/alessandroleite/jdiffbot</url>
 		<tag>HEAD</tag>
 	</scm>
-	
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<deploy-repo.url>file:///${env.DEFAULT_MAVEN_REPO_URL}</deploy-repo.url>
-		<source.version>1.6</source.version>
-		<gson.version>1.7.1</gson.version>
-		<commons-lang.version>2.6</commons-lang.version>
-	</properties>
 
 	<repositories>
 		<repository>
@@ -152,7 +154,7 @@
 			<version>${commons-lang.version}</version>
 			<scope>compile</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
@@ -186,12 +188,13 @@
 				<configuration>
 					<header>${license-header-file}</header>
 					<excludes>
-						<exclude>LICENSE.txt</exclude>
+						<exclude>LICENSE.HEADER</exclude>
 						<exclude>**/README.md</exclude>
 						<exclude>**/travis.yml</exclude>
 						<exclude>**/checkstyle.xml</exclude>
 						<exclude>**/.checkstyle</exclude>
 						<exclude>**/.gitignore</exclude>
+						<exclude>**/.travis.yml</exclude>
 					</excludes>
 					<strictCheck>true</strictCheck>
 				</configuration>
@@ -246,18 +249,38 @@
 				<version>2.9</version>
 				<configuration>
 					<additionalProjectnatures>
-						<projectnature> org.maven.ide.eclipse.maven2Nature</projectnature>
-						<projectnature> org.eclipse.jem.workbench.JavaEMFNature</projectnature>
+						<projectnature>org.maven.ide.eclipse.maven2Nature</projectnature>
+						<projectnature>org.eclipse.jem.workbench.JavaEMFNature</projectnature>
+						<projectnature>org.eclipse.wst.jsdt.core.jsNature </projectnature>
+						<projectnature>com.atlassw.tools.eclipse.checkstyle.CheckstyleNature</projectnature>
 					</additionalProjectnatures>
 					<additionalBuildcommands>
-						<buildcommand> org.maven.ide.eclipse.maven2Builder </buildcommand>
+						<buildcommand>org.maven.ide.eclipse.maven2Builder</buildcommand>
+						<buildcommand>com.atlassw.tools.eclipse.checkstyle.CheckstyleBuilder</buildcommand>
 						<forceRecheck>true</forceRecheck>
 					</additionalBuildcommands>
+					<additionalConfig>
+						<file>
+							<name>.checkstyle</name>
+							<content>
+								<![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+								<fileset-config file-format-version="1.2.0" simple-config="true" sync-formatter="true">
+								<local-check-config name="${project.groupId}-checkstyle" location="${checkstyle.file}" type="external" description="">
+								<additional-data name="protect-config-file" value="false"/>
+								</local-check-config>
+								<fileset name="all" enabled="true" check-config-name="${project.groupId}-checkstyle" local="true">
+								<file-match-pattern match-pattern="." include-pattern="true"/>
+								</fileset>
+								</fileset-config>
+								]]>
+							</content>
+						</file>
+					</additionalConfig>
 					<useProjectReferences>true</useProjectReferences>
 					<downloadSources>true</downloadSources>
 					<downloadJavadocs>true</downloadJavadocs>
 					<encoding>${project.build.sourceEncoding}</encoding>
-					<projectNameTemplate>[artifactId]-[version]</projectNameTemplate>
+					<projectNameTemplate>[groupId]-[artifactId]-[version]</projectNameTemplate>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -297,6 +320,6 @@
 			</plugin>
 		</plugins>
 	</build>
-	
-	
+
+
 </project>

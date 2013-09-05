@@ -35,18 +35,31 @@ import diffboat.type.json.ArticleJsonDeserializer;
 import diffboat.type.json.MediaJsonDeserializer;
 import diffboat.type.json.MediasJsonDeserializer;
 
-public final class GsonFactory {
+public final class GsonFactory
+{
+    /**
+     * Private constructor to avoid instance of this class.
+     */
+    private GsonFactory()
+    {
+        throw new UnsupportedOperationException();
+    }
 
-	private GsonFactory() {
-		throw new UnsupportedOperationException();
-	}
-
-	public static <T> T parser(String json, Class<T> type) {
-		Gson gson = new GsonBuilder()
-		 		.registerTypeAdapter(Article.class, new ArticleJsonDeserializer())
-				.registerTypeAdapter(Media.class, new MediaJsonDeserializer())
-				.registerTypeAdapter(Medias.class, new MediasJsonDeserializer())
-				.create();
-		return gson.fromJson(json, type);
-	}
+    /**
+     * 
+     * @param json The JSON {@link String} to be parsed.
+     * @param type The Java type of the JSON {@link String}.
+     * @param <T> The type to be returned.
+     * @return An instance of the {@code type}.
+     */
+    public static <T> T parser(String json, Class<T> type)
+    {
+        Gson gson = new GsonBuilder()
+        .registerTypeAdapter(Article.class, new ArticleJsonDeserializer())
+        .registerTypeAdapter(Media.class, new MediaJsonDeserializer())
+        .registerTypeAdapter(Medias.class, new MediasJsonDeserializer())
+        .create();
+        
+        return gson.fromJson(json, type);
+    }
 }

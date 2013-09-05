@@ -31,71 +31,86 @@ import diffboat.api.ArticleBuilder;
 import diffboat.http.ServiceInvoker;
 import diffboat.model.Article;
 
-public class ArticleBuilderImpl implements ArticleBuilder {
+public class ArticleBuilderImpl implements ArticleBuilder
+{
+    /**
+     * Default value for <code>null</code> parameter value.
+     */
+    private static final String NULL_PARAM_VALUE = "";
 
-	/**
-	 * Default value for <code>null</code> parameter value.
-	 */
-	private static final String NULL_PARAM_VALUE = "";
+    /**
+     * The article URI.
+     */
+    private final String uri_ = "article";
 
-	/**
-	 * The article URI.
-	 */
-	private final String uri = "article";
+    /**
+     * The {@link ServiceInvoker} instance of the invoke the article service.
+     */
+    private final ServiceInvoker invoker_;
 
-	/**
-	 * The {@link ServiceInvoker} instance of the invoke the article service.
-	 */
-	private final ServiceInvoker request;
+    /**
+     * Creates an instance of this class using the user's token.
+     * 
+     * @param token
+     *            The token to be used.
+     */
+    public ArticleBuilderImpl(String token)
+    {
+        invoker_ = new ServiceInvoker(token, uri_);
+    }
 
-	public ArticleBuilderImpl(String token) {
-		request = new ServiceInvoker(token, uri);
-	}
+    @Override
+    public ArticleBuilder extractFrom(String url)
+    {
+        invoker_.addParam("url", ServiceInvoker.encode(url));
+        return this;
+    }
 
-	@Override
-	public ArticleBuilder extractFrom(String url) {
-		request.addParam("url", ServiceInvoker.encode(url));
-		return this;
-	}
+    @Override
+    public ArticleBuilder asHtml()
+    {
+        invoker_.addParam("url", NULL_PARAM_VALUE);
+        return this;
+    }
 
-	@Override
-	public ArticleBuilder asHtml() {
-		request.addParam("url", NULL_PARAM_VALUE);
-		return this;
-	}
+    @Override
+    public ArticleBuilder dontStripAds()
+    {
+        invoker_.addParam("dontStripAds", NULL_PARAM_VALUE);
+        return this;
+    }
 
-	@Override
-	public ArticleBuilder dontStripAds() {
-		request.addParam("dontStripAds", NULL_PARAM_VALUE);
-		return this;
-	}
+    @Override
+    public ArticleBuilder withTags()
+    {
+        invoker_.addParam("tags", NULL_PARAM_VALUE);
+        return this;
+    }
 
-	@Override
-	public ArticleBuilder withTags() {
-		request.addParam("tags", NULL_PARAM_VALUE);
-		return this;
-	}
+    @Override
+    public ArticleBuilder withComments()
+    {
+        invoker_.addParam("comments", NULL_PARAM_VALUE);
+        return this;
+    }
 
-	@Override
-	public ArticleBuilder withComments() {
-		request.addParam("comments", NULL_PARAM_VALUE);
-		return this;
-	}
+    @Override
+    public ArticleBuilder withSummary()
+    {
+        invoker_.addParam("summary", NULL_PARAM_VALUE);
+        return this;
+    }
 
-	@Override
-	public ArticleBuilder withSummary() {
-		request.addParam("summary", NULL_PARAM_VALUE);
-		return this;
-	}
+    @Override
+    public ArticleBuilder withTimeout(long timeout)
+    {
+        invoker_.addParam("timeout", String.valueOf(timeout));
+        return this;
+    }
 
-	@Override
-	public ArticleBuilder withTimeout(long timeout) {
-		request.addParam("timeout", String.valueOf(timeout));
-		return this;
-	}
-
-	@Override
-	public Article analyze() throws IOException {
-		return request.execute(Article.class);
-	}
+    @Override
+    public Article analyze() throws IOException
+    {
+        return invoker_.execute(Article.class);
+    }
 }

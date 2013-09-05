@@ -31,28 +31,44 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class Medias implements Iterable<Media> {
-	
-	private List<Media> medias = new CopyOnWriteArrayList<Media>();
-	
-	public Collection<Media> get(){
-		return Collections.unmodifiableList(medias);
-	}
-	
-	@Override
-	public Iterator<Media> iterator() {
-		return this.get().iterator();
-	}
-	
-	
-	public void add(Media media){
-		if (media != null) {
-			this.medias.add(media);
-		}
-	}
-	
-	@Override
-	public String toString() {
-		return medias.toString();
-	}
+public class Medias implements Iterable<Media>
+{
+    /**
+     * The delegate {@link List}.
+     */
+    private List<Media> medias_ = new CopyOnWriteArrayList<Media>();
+
+    /**
+     * Returns an unmodifiable {@link Collection} with the available medias.
+     * @return An unmodifiable {@link Collection} with the available medias.
+     */
+    public Collection<Media> get()
+    {
+        return Collections.unmodifiableList(medias_);
+    }
+
+    @Override
+    public Iterator<Media> iterator()
+    {
+        return this.get().iterator();
+    }
+
+    /**
+     * Adds a new {@link Media} only if it's not <code>null</code>.
+     * 
+     * @param media The media do be added. <code>null</code> values are not accepted.
+     */
+    public void add(Media media)
+    {
+        if (media != null)
+        {
+            this.medias_.add(media);
+        }
+    }
+
+    @Override
+    public String toString()
+    {
+        return medias_.toString();
+    }
 }

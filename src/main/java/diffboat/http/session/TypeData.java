@@ -25,21 +25,35 @@
  */
 package diffboat.http.session;
 
-public enum TypeData {
+public enum TypeData
+{
+    /** JSON format. */
+    JSON("application/json"),
 
-	/** JSON format */
-	JSON("application/json"),
+    /** Form URL Encoded. */
+    FORM_URL_ENCODED("application/x-www-form-urlencoded");
 
-	/** Form URL Encoded */
-	FORM_URL_ENCODED("application/x-www-form-urlencoded");
+    /**
+     * The mime type to be used.
+     */
+    private final String mimeType_;
 
-	private final String mimeType;
+    /**
+     * Creates an instance of this enum using the given mime type.
+     * 
+     * @param mime The mime type to be used.
+     */
+    private TypeData(String mime)
+    {
+        this.mimeType_ = mime;
+    }
 
-	private TypeData(String mime) {
-		this.mimeType = mime;
-	}
-
-	public String mimeType() {
-		return mimeType;
-	}
+    /**
+     * Returns the mime type name.
+     * @return the mime type name.
+     */
+    public String mimeType()
+    {
+        return mimeType_;
+    }
 }

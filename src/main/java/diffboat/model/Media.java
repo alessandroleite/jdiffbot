@@ -27,56 +27,80 @@ package diffboat.model;
 
 import java.io.Serializable;
 
-public final class Media implements Serializable {
+public final class Media implements Serializable
+{
 
-	/**
-	 * Serial code version <code>serialVersionUID</code>
-	 */
-	private static final long serialVersionUID = 7744306540133027033L;
-	
-	private final String type;
-	private final String link;
-	private final boolean primary;
-	
+    /**
+     * Serial code version <code>serialVersionUID</code> for serialization.
+     */
+    private static final long serialVersionUID = 7744306540133027033L;
 
-	/**
-	 * @param type
-	 * @param link
-	 */
-	public Media(String link, String type, boolean primary) {
-		this.link = link;
-		this.type = type;
-		this.primary = primary;
-	}
-	
-	public Media(String link, String type){
-		this(link, type, false);
-	}
+    /**
+     * The media type (audio, video, etc.).
+     */
+    private final String type_;
+    
+    /**
+     * The link to the media. 
+     */
+    private final String link_;
+    
+    /**
+     * A flag that indicates if it's primary.
+     */
+    private final boolean primary_;
 
-	/**
-	 * @return the type
-	 */
-	public String type() {
-		return type;
-	}
+    /**
+     * 
+     * @param link The link to the media.
+     * @param type The type of the media.
+     * @param primary a flag indicating if the media is primary or not.
+     */
+    public Media(String link, String type, boolean primary)
+    {
+        this.link_ = link;
+        this.type_ = type;
+        this.primary_ = primary;
+    }
 
-	/**
-	 * @return the link
-	 */
-	public String link() {
-		return link;
-	}
-	
+    /**
+     * Creates an {@link Media} instance with the link and type.
+     * 
+     * @param link The link to the media.
+     * @param type The type of the media.
+     */
+    public Media(String link, String type)
+    {
+        this(link, type, false);
+    }
 
-	/**
-	 * @return the primary
-	 */
-	public boolean isPrimary() {
-		return primary;
-	}
+    /**
+     * @return the type
+     */
+    public String type()
+    {
+        return type_;
+    }
 
-	@Override
-	public String toString() {
-		return "Media - type:" + this.type() + " link:" + this.link();
-	}
+    /**
+     * @return the link
+     */
+    public String link()
+    {
+        return link_;
+    }
+
+    /**
+     * @return the primary
+     */
+    public boolean isPrimary()
+    {
+        return primary_;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Media - type:" + this.type() + " link:" + this.link();
+    }
 }

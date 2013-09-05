@@ -29,67 +29,67 @@ import java.io.IOException;
 
 import diffboat.model.Article;
 
-public interface ArticleBuilder 
+public interface ArticleBuilder
 {
+    /**
+     * Extract an article of a given URL.
+     * 
+     * @param url
+     *            Encoded URL to extract the {@link Article} from.
+     * @return The same instance but with the URL defined to extract the article.
+     */
+    ArticleBuilder extractFrom(String url);
 
-	/**
-	 * Extract an article of a given URL.
-	 * 
-	 * @param url
-	 *            Encoded URL to extract the {@link Article} from.
-	 * @return The same instance but with the URL defined to extract the article. 
-	 */
-	ArticleBuilder extractFrom(String url);
+    /**
+     * Return html instead of plain text.
+     * 
+     * @return The same instance with the result defined as HTML.
+     */
+    ArticleBuilder asHtml();
 
-	/**
-	 * Return html instead of plain text.
-	 * 
-	 * @return The same instance with the result defined as HTML.
-	 */
-	ArticleBuilder asHtml();
+    /**
+     * Doesn't strip any inline ads.
+     * 
+     * @return The same instance but with option to does not strip any inline ads.
+     */
+    ArticleBuilder dontStripAds();
 
-	/**
-	 * Doesn't strip any inline ads.
-	 * 
-	 * @return The same instance but with option to does not strip any inline ads.
-	 */
-	ArticleBuilder dontStripAds();
+    /**
+     * Generate tags for the extracted story.
+     * 
+     * @return The same instance configured to generate the tags of the article.
+     */
+    ArticleBuilder withTags();
 
-	/**
-	 * Generate tags for the extracted story.
-	 * 
-	 * @return The same instance configured to generate the tags of the article.
-	 */
-	ArticleBuilder withTags();
+    /**
+     * Find the comments and identify count, link, etc.
+     * 
+     * @return The same instance configured to find comments, links, etc.
+     */
+    ArticleBuilder withComments();
 
-	/**
-	 * Find the comments and identify count, link, etc.
-	 * 
-	 * @return The same instance configured  to find comments, links, etc.
-	 */
-	ArticleBuilder withComments();
+    /**
+     * Returns a summary text of the article.
+     * 
+     * @return The same instance configured to return a summary of the article.
+     */
+    ArticleBuilder withSummary();
 
-	/**
-	 * Returns a summary text of the article.
-	 * 
-	 * @return The same instance configured to return a summary of the article.
-	 */
-	ArticleBuilder withSummary();
-	
-	/**
-	 * Overrides the default API timeout of 5000ms.
-	 *  
-	 * @param timeout The timeout in milliseconds.
-	 * @return The same instance configured the timeout.
-	 */
-	ArticleBuilder withTimeout(long timeout);
+    /**
+     * Overrides the default API timeout of 5000ms.
+     * 
+     * @param timeout
+     *            The timeout in milliseconds.
+     * @return The same instance configured the timeout.
+     */
+    ArticleBuilder withTimeout(long timeout);
 
-	/**
-	 * Returns the {@link Article} according with the options defined. The default option
-	 * is plain text output without comments but with a summary.
-	 * 
-	 * @return the {@link Article} with the options defined. The default option
-	 *         is plain text output without comments but with a summary.
-	 */
-	Article analyze() throws IOException;
+    /**
+     * Returns the {@link Article} according with the options defined. The default option is plain text output without comments but with a summary.
+     * 
+     * @return the {@link Article} with the options defined. The default option is plain text output without comments but with a summary.
+     * @throws IOException
+     *             If the service is down or if there isn't a Internet connection.
+     */
+    Article analyze() throws IOException;
 }

@@ -12,6 +12,7 @@ target
 .classpath
 .project
 .settings/
+.checkstyle
 
 #Temp files
 *~
