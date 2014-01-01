@@ -73,3 +73,5 @@ To contribute, follow these steps:
 
 The project is licensed under the MIT license. 
 See License.txt for details.
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/alessandroleite/jdiffbot/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
