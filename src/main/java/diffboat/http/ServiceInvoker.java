@@ -294,8 +294,10 @@ public final class ServiceInvoker
     protected <T> T execute(Class<T> jsonType, StringBuilder buffer) throws IOException
     {
         URL url = new URL(buildURL());
-        buffer.append(asString(url.openStream()));
-        return GsonFactory.parser(buffer.toString(), jsonType);
+        try (InputStream inputStream = url.openStream()) {
+            buffer.append(asString(inputStream));
+            return GsonFactory.parser(buffer.toString(), jsonType);
+        }
     }
 
     /**

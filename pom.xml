@@ -15,7 +15,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<deploy-repo.url>file:///${env.DEFAULT_MAVEN_REPO_URL}</deploy-repo.url>
-		<source.version>1.6</source.version>
+		<source.version>1.7</source.version>
 		<gson.version>1.7.1</gson.version>
 		<commons-lang.version>2.6</commons-lang.version>
 		<checkstyle.file>${project.basedir}/checkstyle.xml</checkstyle.file>
