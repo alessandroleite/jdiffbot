@@ -1,6 +1,6 @@
 JDiffbot [![Build Status](https://secure.travis-ci.org/alessandroleite/jdiffbot.png)](http://travis-ci.org/alessandroleite/jdiffbot) 
 ===================
-> Stable version: 1.1.0
+> Stable version: 1.1.1
 
 What is it?
 ------------
@@ -29,7 +29,7 @@ Declare the dependency
     <dependency>
        <groupId>jdiffbot</groupId>
        <artifactId>jdiffbot</artifactId>
-       <version>1.1.0</version>
+       <version>1.1.1</version>
     </dependency>
 
 
